@@ -22,17 +22,17 @@
     <OutputType>WinExe</OutputType>
     <OptionCompare>Binary</OptionCompare>
     <OptionExplicit>On</OptionExplicit>
-    <OptionStrict>Off</OptionStrict>
+    <OptionStrict>On</OptionStrict>
     <RootNamespace>VB_FullDemo</RootNamespace>
-    <StartupObject>VB_FullDemo.VB_FullDemo</StartupObject>
+    <StartupObject>VB_FullDemo.My.MyApplication</StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
-    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <MyType>WindowsForms</MyType>
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -50,7 +50,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\debug\</OutputPath>
     <DocumentationFile>VB_FullDemo.xml</DocumentationFile>
     <BaseAddress>285212672</BaseAddress>
     <ConfigurationOverrideFile>
@@ -65,13 +65,14 @@
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningLevel>1</WarningLevel>
-    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <NoWarn>42353,42354,42355</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\release\</OutputPath>
     <DocumentationFile>VB_FullDemo.xml</DocumentationFile>
     <BaseAddress>285212672</BaseAddress>
     <ConfigurationOverrideFile>
@@ -86,9 +87,65 @@
     <RemoveIntegerChecks>false</RemoveIntegerChecks>
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
     <WarningLevel>1</WarningLevel>
-    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <NoWarn>42353,42354,42355</NoWarn>
     <DebugType>none</DebugType>
     <Prefer32Bit>false</Prefer32Bit>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\debug\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>VB_FullDemo.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <DefineConstants>PLATFORM="X86"</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x86\release\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>VB_FullDemo.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <PlatformTarget>x86</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <DefineConstants>PLATFORM="X86"</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>VB_FullDemo.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <DefineConstants>PLATFORM="X64"</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\x64\release\</OutputPath>
+    <BaseAddress>285212672</BaseAddress>
+    <DocumentationFile>VB_FullDemo.xml</DocumentationFile>
+    <Optimize>true</Optimize>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42353,42354,42355</NoWarn>
+    <PlatformTarget>x64</PlatformTarget>
+    <WarningsAsErrors>41999,42016,42017,42018,42019,42020,42021,42022,42032,42036</WarningsAsErrors>
+    <DefineConstants>PLATFORM="X64"</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>My Project\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -109,12 +166,19 @@
     <Import Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\..\dtwain32u.vb">
+      <Link>dtwain32u.vb</Link>
+    </Compile>
+    <Compile Include="..\..\dtwain64u.vb">
+      <Link>dtwain64u.vb</Link>
+    </Compile>
     <Compile Include="AboutDlg.Designer.vb">
       <DependentUpon>AboutDlg.vb</DependentUpon>
     </Compile>
     <Compile Include="AboutDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="CustomLanguageDlg.Designer.vb">
       <DependentUpon>CustomLanguageDlg.vb</DependentUpon>
     </Compile>
@@ -139,7 +203,6 @@
     <Compile Include="DibDisplayerDlg2.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dtwain32u.vb" />
     <Compile Include="FileTypeDlg.Designer.vb">
       <DependentUpon>FileTypeDlg.vb</DependentUpon>
     </Compile>
@@ -152,12 +215,24 @@
     <Compile Include="LogFileSelectionDlg.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="SelectSourceByName.Designer.vb">
       <DependentUpon>SelectSourceByName.vb</DependentUpon>
     </Compile>
     <Compile Include="SelectSourceByName.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Settings.vb" />
     <Compile Include="SourcePropertiesDlg.Designer.vb">
       <DependentUpon>SourcePropertiesDlg.vb</DependentUpon>
     </Compile>
@@ -193,6 +268,11 @@
     <EmbeddedResource Include="LogFileSelectionDlg.resx">
       <DependentUpon>LogFileSelectionDlg.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="SelectSourceByName.resx">
       <DependentUpon>SelectSourceByName.vb</DependentUpon>
     </EmbeddedResource>
@@ -205,11 +285,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="My Project\app.manifest" />
     <None Include="My Project\Settings.settings">
       <CustomToolNamespace>My</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <None Include="Resources\dtwain32.ini" />
+    <None Include="Resources\dtwain64.ini" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -237,6 +320,37 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Resources\dtwain32.dll" />
+    <Content Include="Resources\dtwain32u.dll" />
+    <Content Include="Resources\dtwain64u.dll" />
+    <Content Include="Resources\twain32.dll" />
+    <Content Include="Resources\twain64.dll" />
+    <Content Include="Resources\twaininfo.txt" />
+    <Content Include="Resources\twainlanguage.txt" />
+    <Content Include="Resources\twainresourcestrings_dutch.txt" />
+    <Content Include="Resources\twainresourcestrings_english.txt" />
+    <Content Include="Resources\twainresourcestrings_french.txt" />
+    <Content Include="Resources\twainresourcestrings_german.txt" />
+    <Content Include="Resources\twainresourcestrings_greek.txt" />
+    <Content Include="Resources\twainresourcestrings_italian.txt" />
+    <Content Include="Resources\twainresourcestrings_japanese.txt" />
+    <Content Include="Resources\twainresourcestrings_korean.txt" />
+    <Content Include="Resources\twainresourcestrings_portuguese.txt" />
+    <Content Include="Resources\twainresourcestrings_portuguese_br.txt" />
+    <Content Include="Resources\twainresourcestrings_romanian.txt" />
+    <Content Include="Resources\twainresourcestrings_russian.txt" />
+    <Content Include="Resources\twainresourcestrings_simplified_chinese.txt" />
+    <Content Include="Resources\twainresourcestrings_spanish.txt" />
+    <Content Include="Resources\twainresourcestrings_traditional_chinese.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

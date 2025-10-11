@@ -5,8 +5,7 @@ Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Diagnostics
 
-Public Class VB_FullDemo
-    Inherits System.Windows.Forms.Form
+Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
 
 #Region " Windows Form Designer generated code "
 
@@ -31,278 +30,276 @@ Public Class VB_FullDemo
 
     'Required by the Windows Form Designer
     Private components As System.ComponentModel.IContainer
+    Private WithEvents MenuItemExitDemo As MenuItem
+    Private WithEvents MenuItemSelectSource As MenuItem
+    Private WithEvents MenuItemSelectSourceByName As MenuItem
+    Private WithEvents MenuItemSelectDefaultSource As MenuItem
+    Private WithEvents MenuItemSelectSourceCustom As MenuItem
+    Private WithEvents MenuItemSourceProperties As MenuItem
+    Private WithEvents MenuItemCloseSource As MenuItem
+    Private WithEvents MenuItemAcquireNative As MenuItem
+    Private WithEvents MenuItemAcquireBuffered As MenuItem
+    Private WithEvents MenuItemAcquireFile As MenuItem
+    Private WithEvents MenuItemAcquireFileUsingDriver As MenuItem
+    Private WithEvents MenuItemShowPreview As MenuItem
+    Private WithEvents MenuItemUseSourceUI As MenuItem
+    Private WithEvents MenuItemDiscardBlankPages As MenuItem
+    Private WithEvents MenuItemLoggingOptions As MenuItem
+    Private WithEvents MenuItemDTWAINVersion As MenuItem
+    Private WithEvents MenuItemDutch As MenuItem
+    Private WithEvents MenuItemEnglish As MenuItem
+    Private WithEvents MenuItemFrench As MenuItem
+    Private WithEvents MenuItemGerman As MenuItem
+    Private WithEvents MenuItemItalian As MenuItem
+    Private WithEvents MenuItemPortuguese As MenuItem
+    Private WithEvents MenuItemRomanian As MenuItem
+    Private WithEvents MenuItemRussian As MenuItem
+    Private WithEvents MenuItemSimplifiedChinese As MenuItem
+    Private WithEvents MenuItemSpanish As MenuItem
+    Private WithEvents MenuItemCustomLanguage As MenuItem
 
-    'NOTE: The following procedure is required by the Windows Form Designer
-    'It can be modified using the Windows Form Designer.  
-    'Do not modify it using the code editor.
-    Friend WithEvents MainMenu1 As System.Windows.Forms.MainMenu
-    Friend WithEvents MenuItem1 As System.Windows.Forms.MenuItem
-    Friend WithEvents ExitDemo As System.Windows.Forms.MenuItem
-    Friend WithEvents SelectSource As System.Windows.Forms.MenuItem
-    Friend WithEvents SelectSourceByName As System.Windows.Forms.MenuItem
-    Friend WithEvents SelectDefaultSource As System.Windows.Forms.MenuItem
-    Friend WithEvents SelectSourceCustom As System.Windows.Forms.MenuItem
-    Friend WithEvents MenuItem5 As System.Windows.Forms.MenuItem
-    Friend WithEvents SourceProperties As System.Windows.Forms.MenuItem
-    Friend WithEvents MenuItem7 As System.Windows.Forms.MenuItem
-    Friend WithEvents CloseSource As System.Windows.Forms.MenuItem
-    Friend WithEvents MenuItem10 As System.Windows.Forms.MenuItem
-    Friend WithEvents AcquireNative As System.Windows.Forms.MenuItem
-    Friend WithEvents AcquireBuffered As System.Windows.Forms.MenuItem
-    Friend WithEvents AcquireFile As System.Windows.Forms.MenuItem
-    Friend WithEvents AcquireFileUsingDriver As System.Windows.Forms.MenuItem
-    Friend WithEvents MenuItem14 As System.Windows.Forms.MenuItem
-    Friend WithEvents ShowPreview As System.Windows.Forms.MenuItem
-    Friend WithEvents UseSourceUI As System.Windows.Forms.MenuItem
-    Friend WithEvents DiscardBlankPages As System.Windows.Forms.MenuItem
-    Friend WithEvents LoggingOptions As System.Windows.Forms.MenuItem
-    Friend WithEvents MenuItem2 As System.Windows.Forms.MenuItem
-    Friend WithEvents DTWAINVersion As System.Windows.Forms.MenuItem
-    Friend WithEvents MenuItem3 As MenuItem
-    Friend WithEvents menuDutch As MenuItem
-    Friend WithEvents menuEnglish As MenuItem
-    Friend WithEvents menuFrench As MenuItem
-    Friend WithEvents menuGerman As MenuItem
-    Friend WithEvents menuItalian As MenuItem
-    Friend WithEvents menuPortuguese As MenuItem
-    Friend WithEvents menuRomanian As MenuItem
-    Friend WithEvents menuRussian As MenuItem
-    Friend WithEvents menuSimplifiedChinese As MenuItem
-    Friend WithEvents menuSpanish As MenuItem
-    Friend WithEvents menuCustomLanguage As MenuItem
-    Friend WithEvents MenuItem9 As System.Windows.Forms.MenuItem
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Me.MainMenu1 = New System.Windows.Forms.MainMenu(Me.components)
-        Me.MenuItem1 = New System.Windows.Forms.MenuItem()
-        Me.SelectSource = New System.Windows.Forms.MenuItem()
-        Me.SelectSourceByName = New System.Windows.Forms.MenuItem()
-        Me.SelectDefaultSource = New System.Windows.Forms.MenuItem()
-        Me.SelectSourceCustom = New System.Windows.Forms.MenuItem()
-        Me.MenuItem5 = New System.Windows.Forms.MenuItem()
-        Me.SourceProperties = New System.Windows.Forms.MenuItem()
-        Me.MenuItem7 = New System.Windows.Forms.MenuItem()
-        Me.CloseSource = New System.Windows.Forms.MenuItem()
-        Me.ExitDemo = New System.Windows.Forms.MenuItem()
-        Me.MenuItem9 = New System.Windows.Forms.MenuItem()
-        Me.AcquireNative = New System.Windows.Forms.MenuItem()
-        Me.AcquireBuffered = New System.Windows.Forms.MenuItem()
-        Me.AcquireFile = New System.Windows.Forms.MenuItem()
-        Me.AcquireFileUsingDriver = New System.Windows.Forms.MenuItem()
-        Me.MenuItem14 = New System.Windows.Forms.MenuItem()
-        Me.ShowPreview = New System.Windows.Forms.MenuItem()
-        Me.UseSourceUI = New System.Windows.Forms.MenuItem()
-        Me.DiscardBlankPages = New System.Windows.Forms.MenuItem()
-        Me.MenuItem10 = New System.Windows.Forms.MenuItem()
-        Me.LoggingOptions = New System.Windows.Forms.MenuItem()
-        Me.MenuItem2 = New System.Windows.Forms.MenuItem()
-        Me.DTWAINVersion = New System.Windows.Forms.MenuItem()
-        Me.MenuItem3 = New System.Windows.Forms.MenuItem()
-        Me.menuDutch = New System.Windows.Forms.MenuItem()
-        Me.menuEnglish = New System.Windows.Forms.MenuItem()
-        Me.menuFrench = New System.Windows.Forms.MenuItem()
-        Me.menuGerman = New System.Windows.Forms.MenuItem()
-        Me.menuItalian = New System.Windows.Forms.MenuItem()
-        Me.menuPortuguese = New System.Windows.Forms.MenuItem()
-        Me.menuRomanian = New System.Windows.Forms.MenuItem()
-        Me.menuRussian = New System.Windows.Forms.MenuItem()
-        Me.menuSimplifiedChinese = New System.Windows.Forms.MenuItem()
-        Me.menuSpanish = New System.Windows.Forms.MenuItem()
-        Me.menuCustomLanguage = New System.Windows.Forms.MenuItem()
+        Dim MainMenu As System.Windows.Forms.MainMenu
+        Dim MainMenuItemSourceSelectionTest As System.Windows.Forms.MenuItem
+        Dim MenuItemSeperator1 As System.Windows.Forms.MenuItem
+        Dim MenuItemSeperator2 As System.Windows.Forms.MenuItem
+        Dim MainMenuItemAcquireTest As System.Windows.Forms.MenuItem
+        Dim MenuItemSeperator3 As System.Windows.Forms.MenuItem
+        Dim MainMenuItemTWAINLogging As System.Windows.Forms.MenuItem
+        Dim MainMenuItemLanguage As System.Windows.Forms.MenuItem
+        Dim MainMenuItemHelp As System.Windows.Forms.MenuItem
+        Me.MenuItemSelectSource = New System.Windows.Forms.MenuItem()
+        Me.MenuItemSelectSourceByName = New System.Windows.Forms.MenuItem()
+        Me.MenuItemSelectDefaultSource = New System.Windows.Forms.MenuItem()
+        Me.MenuItemSelectSourceCustom = New System.Windows.Forms.MenuItem()
+        Me.MenuItemSourceProperties = New System.Windows.Forms.MenuItem()
+        Me.MenuItemCloseSource = New System.Windows.Forms.MenuItem()
+        Me.MenuItemExitDemo = New System.Windows.Forms.MenuItem()
+        Me.MenuItemAcquireNative = New System.Windows.Forms.MenuItem()
+        Me.MenuItemAcquireBuffered = New System.Windows.Forms.MenuItem()
+        Me.MenuItemAcquireFile = New System.Windows.Forms.MenuItem()
+        Me.MenuItemAcquireFileUsingDriver = New System.Windows.Forms.MenuItem()
+        Me.MenuItemShowPreview = New System.Windows.Forms.MenuItem()
+        Me.MenuItemUseSourceUI = New System.Windows.Forms.MenuItem()
+        Me.MenuItemDiscardBlankPages = New System.Windows.Forms.MenuItem()
+        Me.MenuItemLoggingOptions = New System.Windows.Forms.MenuItem()
+        Me.MenuItemDutch = New System.Windows.Forms.MenuItem()
+        Me.MenuItemEnglish = New System.Windows.Forms.MenuItem()
+        Me.MenuItemFrench = New System.Windows.Forms.MenuItem()
+        Me.MenuItemGerman = New System.Windows.Forms.MenuItem()
+        Me.MenuItemItalian = New System.Windows.Forms.MenuItem()
+        Me.MenuItemPortuguese = New System.Windows.Forms.MenuItem()
+        Me.MenuItemRomanian = New System.Windows.Forms.MenuItem()
+        Me.MenuItemRussian = New System.Windows.Forms.MenuItem()
+        Me.MenuItemSimplifiedChinese = New System.Windows.Forms.MenuItem()
+        Me.MenuItemSpanish = New System.Windows.Forms.MenuItem()
+        Me.MenuItemCustomLanguage = New System.Windows.Forms.MenuItem()
+        Me.MenuItemDTWAINVersion = New System.Windows.Forms.MenuItem()
+        MainMenu = New System.Windows.Forms.MainMenu(Me.components)
+        MainMenuItemSourceSelectionTest = New System.Windows.Forms.MenuItem()
+        MenuItemSeperator1 = New System.Windows.Forms.MenuItem()
+        MenuItemSeperator2 = New System.Windows.Forms.MenuItem()
+        MainMenuItemAcquireTest = New System.Windows.Forms.MenuItem()
+        MenuItemSeperator3 = New System.Windows.Forms.MenuItem()
+        MainMenuItemTWAINLogging = New System.Windows.Forms.MenuItem()
+        MainMenuItemLanguage = New System.Windows.Forms.MenuItem()
+        MainMenuItemHelp = New System.Windows.Forms.MenuItem()
         Me.SuspendLayout()
         '
-        'MainMenu1
+        'MainMenu
         '
-        Me.MainMenu1.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MenuItem1, Me.MenuItem9, Me.MenuItem10, Me.MenuItem3, Me.MenuItem2})
+        MainMenu.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {MainMenuItemSourceSelectionTest, MainMenuItemAcquireTest, MainMenuItemTWAINLogging, MainMenuItemLanguage, MainMenuItemHelp})
         '
-        'MenuItem1
+        'MainMenuItemSourceSelectionTest
         '
-        Me.MenuItem1.Index = 0
-        Me.MenuItem1.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.SelectSource, Me.SelectSourceByName, Me.SelectDefaultSource, Me.SelectSourceCustom, Me.MenuItem5, Me.SourceProperties, Me.MenuItem7, Me.CloseSource, Me.ExitDemo})
-        Me.MenuItem1.Text = "&Source Selection Test"
+        MainMenuItemSourceSelectionTest.Index = 0
+        MainMenuItemSourceSelectionTest.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MenuItemSelectSource, Me.MenuItemSelectSourceByName, Me.MenuItemSelectDefaultSource, Me.MenuItemSelectSourceCustom, MenuItemSeperator1, Me.MenuItemSourceProperties, MenuItemSeperator2, Me.MenuItemCloseSource, Me.MenuItemExitDemo})
+        MainMenuItemSourceSelectionTest.Text = "&Source Selection Test"
         '
-        'SelectSource
+        'MenuItemSelectSource
         '
-        Me.SelectSource.Index = 0
-        Me.SelectSource.Text = "Select Source..."
+        Me.MenuItemSelectSource.Index = 0
+        Me.MenuItemSelectSource.Text = "Select Source..."
         '
-        'SelectSourceByName
+        'MenuItemSelectSourceByName
         '
-        Me.SelectSourceByName.Index = 1
-        Me.SelectSourceByName.Text = "Select Source By Name..."
+        Me.MenuItemSelectSourceByName.Index = 1
+        Me.MenuItemSelectSourceByName.Text = "Select Source By Name..."
         '
-        'SelectDefaultSource
+        'MenuItemSelectDefaultSource
         '
-        Me.SelectDefaultSource.Index = 2
-        Me.SelectDefaultSource.Text = "Select Default Source..."
+        Me.MenuItemSelectDefaultSource.Index = 2
+        Me.MenuItemSelectDefaultSource.Text = "Select Default Source..."
         '
-        'SelectSourceCustom
+        'MenuItemSelectSourceCustom
         '
-        Me.SelectSourceCustom.Index = 3
-        Me.SelectSourceCustom.Text = "Select Source Custom..."
+        Me.MenuItemSelectSourceCustom.Index = 3
+        Me.MenuItemSelectSourceCustom.Text = "Select Source Custom..."
         '
-        'MenuItem5
+        'MenuItemSeperator1
         '
-        Me.MenuItem5.Index = 4
-        Me.MenuItem5.Text = "-"
+        MenuItemSeperator1.Index = 4
+        MenuItemSeperator1.Text = "-"
         '
-        'SourceProperties
+        'MenuItemSourceProperties
         '
-        Me.SourceProperties.Index = 5
-        Me.SourceProperties.Text = "Source Properties..."
+        Me.MenuItemSourceProperties.Index = 5
+        Me.MenuItemSourceProperties.Text = "Source Properties..."
         '
-        'MenuItem7
+        'MenuItemSeperator2
         '
-        Me.MenuItem7.Index = 6
-        Me.MenuItem7.Text = "-"
+        MenuItemSeperator2.Index = 6
+        MenuItemSeperator2.Text = "-"
         '
-        'CloseSource
+        'MenuItemCloseSource
         '
-        Me.CloseSource.Index = 7
-        Me.CloseSource.Text = "Close Source..."
+        Me.MenuItemCloseSource.Index = 7
+        Me.MenuItemCloseSource.Text = "Close Source..."
         '
-        'ExitDemo
+        'MenuItemExitDemo
         '
-        Me.ExitDemo.Index = 8
-        Me.ExitDemo.Text = "Exit Demo"
+        Me.MenuItemExitDemo.Index = 8
+        Me.MenuItemExitDemo.Text = "Exit Demo"
         '
-        'MenuItem9
+        'MainMenuItemAcquireTest
         '
-        Me.MenuItem9.Index = 1
-        Me.MenuItem9.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.AcquireNative, Me.AcquireBuffered, Me.AcquireFile, Me.AcquireFileUsingDriver, Me.MenuItem14, Me.ShowPreview, Me.UseSourceUI, Me.DiscardBlankPages})
-        Me.MenuItem9.Text = "&Acquire Test"
+        MainMenuItemAcquireTest.Index = 1
+        MainMenuItemAcquireTest.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MenuItemAcquireNative, Me.MenuItemAcquireBuffered, Me.MenuItemAcquireFile, Me.MenuItemAcquireFileUsingDriver, MenuItemSeperator3, Me.MenuItemShowPreview, Me.MenuItemUseSourceUI, Me.MenuItemDiscardBlankPages})
+        MainMenuItemAcquireTest.Text = "&Acquire Test"
         '
-        'AcquireNative
+        'MenuItemAcquireNative
         '
-        Me.AcquireNative.Index = 0
-        Me.AcquireNative.Text = "Acquire Native..."
+        Me.MenuItemAcquireNative.Index = 0
+        Me.MenuItemAcquireNative.Text = "Acquire Native..."
         '
-        'AcquireBuffered
+        'MenuItemAcquireBuffered
         '
-        Me.AcquireBuffered.Index = 1
-        Me.AcquireBuffered.Text = "Acquire Buffered..."
+        Me.MenuItemAcquireBuffered.Index = 1
+        Me.MenuItemAcquireBuffered.Text = "Acquire Buffered..."
         '
-        'AcquireFile
+        'MenuItemAcquireFile
         '
-        Me.AcquireFile.Index = 2
-        Me.AcquireFile.Text = "Acquire File..."
+        Me.MenuItemAcquireFile.Index = 2
+        Me.MenuItemAcquireFile.Text = "Acquire File..."
         '
-        'AcquireFileUsingDriver
+        'MenuItemAcquireFileUsingDriver
         '
-        Me.AcquireFileUsingDriver.Index = 3
-        Me.AcquireFileUsingDriver.Text = "Acquire File Using Driver..."
+        Me.MenuItemAcquireFileUsingDriver.Index = 3
+        Me.MenuItemAcquireFileUsingDriver.Text = "Acquire File Using Driver..."
         '
-        'MenuItem14
+        'MenuItemSeperator3
         '
-        Me.MenuItem14.Index = 4
-        Me.MenuItem14.Text = "-"
+        MenuItemSeperator3.Index = 4
+        MenuItemSeperator3.Text = "-"
         '
-        'ShowPreview
+        'MenuItemShowPreview
         '
-        Me.ShowPreview.Checked = True
-        Me.ShowPreview.Index = 5
-        Me.ShowPreview.Text = "Show Preview"
+        Me.MenuItemShowPreview.Checked = True
+        Me.MenuItemShowPreview.Index = 5
+        Me.MenuItemShowPreview.Text = "Show Preview"
         '
-        'UseSourceUI
+        'MenuItemUseSourceUI
         '
-        Me.UseSourceUI.Checked = True
-        Me.UseSourceUI.Index = 6
-        Me.UseSourceUI.Text = "Use Source UI"
+        Me.MenuItemUseSourceUI.Checked = True
+        Me.MenuItemUseSourceUI.Index = 6
+        Me.MenuItemUseSourceUI.Text = "Use Source UI"
         '
-        'DiscardBlankPages
+        'MenuItemDiscardBlankPages
         '
-        Me.DiscardBlankPages.Index = 7
-        Me.DiscardBlankPages.Text = "Discard Blank Pages"
+        Me.MenuItemDiscardBlankPages.Index = 7
+        Me.MenuItemDiscardBlankPages.Text = "Discard Blank Pages"
         '
-        'MenuItem10
+        'MainMenuItemTWAINLogging
         '
-        Me.MenuItem10.Index = 2
-        Me.MenuItem10.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.LoggingOptions})
-        Me.MenuItem10.Text = "&TWAIN Logging"
+        MainMenuItemTWAINLogging.Index = 2
+        MainMenuItemTWAINLogging.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MenuItemLoggingOptions})
+        MainMenuItemTWAINLogging.Text = "&TWAIN Logging"
         '
-        'LoggingOptions
+        'MenuItemLoggingOptions
         '
-        Me.LoggingOptions.Index = 0
-        Me.LoggingOptions.Text = "Logging Options..."
+        Me.MenuItemLoggingOptions.Index = 0
+        Me.MenuItemLoggingOptions.Text = "Logging Options..."
         '
-        'MenuItem2
+        'MainMenuItemLanguage
         '
-        Me.MenuItem2.Index = 4
-        Me.MenuItem2.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.DTWAINVersion})
-        Me.MenuItem2.Text = "Help"
+        MainMenuItemLanguage.Index = 3
+        MainMenuItemLanguage.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MenuItemDutch, Me.MenuItemEnglish, Me.MenuItemFrench, Me.MenuItemGerman, Me.MenuItemItalian, Me.MenuItemPortuguese, Me.MenuItemRomanian, Me.MenuItemRussian, Me.MenuItemSimplifiedChinese, Me.MenuItemSpanish, Me.MenuItemCustomLanguage})
+        MainMenuItemLanguage.Text = "Language"
         '
-        'DTWAINVersion
+        'MenuItemDutch
         '
-        Me.DTWAINVersion.Index = 0
-        Me.DTWAINVersion.Text = "DTWAIN Version..."
+        Me.MenuItemDutch.Index = 0
+        Me.MenuItemDutch.Text = "Dutch"
         '
-        'MenuItem3
+        'MenuItemEnglish
         '
-        Me.MenuItem3.Index = 3
-        Me.MenuItem3.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.menuDutch, Me.menuEnglish, Me.menuFrench, Me.menuGerman, Me.menuItalian, Me.menuPortuguese, Me.menuRomanian, Me.menuRussian, Me.menuSimplifiedChinese, Me.menuSpanish, Me.menuCustomLanguage})
-        Me.MenuItem3.Text = "Language"
+        Me.MenuItemEnglish.Index = 1
+        Me.MenuItemEnglish.Text = "English"
         '
-        'menuDutch
+        'MenuItemFrench
         '
-        Me.menuDutch.Index = 0
-        Me.menuDutch.Text = "Dutch"
+        Me.MenuItemFrench.Index = 2
+        Me.MenuItemFrench.Text = "French"
         '
-        'menuEnglish
+        'MenuItemGerman
         '
-        Me.menuEnglish.Index = 1
-        Me.menuEnglish.Text = "English"
+        Me.MenuItemGerman.Index = 3
+        Me.MenuItemGerman.Text = "German"
         '
-        'menuFrench
+        'MenuItemItalian
         '
-        Me.menuFrench.Index = 2
-        Me.menuFrench.Text = "French"
+        Me.MenuItemItalian.Index = 4
+        Me.MenuItemItalian.Text = "Italian"
         '
-        'menuGerman
+        'MenuItemPortuguese
         '
-        Me.menuGerman.Index = 3
-        Me.menuGerman.Text = "German"
+        Me.MenuItemPortuguese.Index = 5
+        Me.MenuItemPortuguese.Text = "Portuguese"
         '
-        'menuItalian
+        'MenuItemRomanian
         '
-        Me.menuItalian.Index = 4
-        Me.menuItalian.Text = "Italian"
+        Me.MenuItemRomanian.Index = 6
+        Me.MenuItemRomanian.Text = "Romanian"
         '
-        'menuPortuguese
+        'MenuItemRussian
         '
-        Me.menuPortuguese.Index = 5
-        Me.menuPortuguese.Text = "Portuguese"
+        Me.MenuItemRussian.Index = 7
+        Me.MenuItemRussian.Text = "Russian"
         '
-        'menuRomanian
+        'MenuItemSimplifiedChinese
         '
-        Me.menuRomanian.Index = 6
-        Me.menuRomanian.Text = "Romanian"
+        Me.MenuItemSimplifiedChinese.Index = 8
+        Me.MenuItemSimplifiedChinese.Text = "Simplified Chinese"
         '
-        'menuRussian
+        'MenuItemSpanish
         '
-        Me.menuRussian.Index = 7
-        Me.menuRussian.Text = "Russian"
+        Me.MenuItemSpanish.Index = 9
+        Me.MenuItemSpanish.Text = "Spanish"
         '
-        'menuSimplifiedChinese
+        'MenuItemCustomLanguage
         '
-        Me.menuSimplifiedChinese.Index = 8
-        Me.menuSimplifiedChinese.Text = "Simplified Chinese"
+        Me.MenuItemCustomLanguage.Index = 10
+        Me.MenuItemCustomLanguage.Text = "Cusstom Language..."
         '
-        'menuSpanish
+        'MainMenuItemHelp
         '
-        Me.menuSpanish.Index = 9
-        Me.menuSpanish.Text = "Spanish"
+        MainMenuItemHelp.Index = 4
+        MainMenuItemHelp.MenuItems.AddRange(New System.Windows.Forms.MenuItem() {Me.MenuItemDTWAINVersion})
+        MainMenuItemHelp.Text = "Help"
         '
-        'menuCustomLanguage
+        'MenuItemDTWAINVersion
         '
-        Me.menuCustomLanguage.Index = 10
-        Me.menuCustomLanguage.Text = "Cusstom Language..."
+        Me.MenuItemDTWAINVersion.Index = 0
+        Me.MenuItemDTWAINVersion.Text = "DTWAIN Version..."
         '
         'VB_FullDemo
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
-        Me.ClientSize = New System.Drawing.Size(664, 621)
-        Me.Menu = Me.MainMenu1
+        Me.ClientSize = New System.Drawing.Size(673, 357)
+        Me.Menu = MainMenu
         Me.Name = "VB_FullDemo"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "DTWAIN VB .NET Example"
         Me.ResumeLayout(False)
 
@@ -318,9 +315,8 @@ Public Class VB_FullDemo
     Private dllExists As Boolean
     Private Shared cb As DTWAINAPI.DTwainCallback = New DTWAINAPI.DTwainCallback(AddressOf callbackfn)
 
-
     Private Sub VB_FullDemo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Me.SelectSource.Enabled = False
+        Me.MenuItemSelectSource.Enabled = False
         dllExists = True
         sOrigTitle = Me.Text
         Try
@@ -330,11 +326,11 @@ Public Class VB_FullDemo
             dllExists = False
             Dispose()
         End Try
-        SelectedSource = 0
+        SelectedSource = CType(0, IntPtr)
         If TwainOK <> 0 Then
             TwainHandle = DTWAINAPI.DTWAIN_SysInitialize()
-            Me.SelectSource.Enabled = True
-            If TwainHandle <> 0 Then
+            Me.MenuItemSelectSource.Enabled = True
+            If TwainHandle <> CType(0, IntPtr) Then
                 DTWAINAPI.DTWAIN_EnableMsgNotify(1)
                 DTWAINAPI.DTWAIN_SetCallback(cb, 0)
             Else
@@ -347,7 +343,7 @@ Public Class VB_FullDemo
     Public Shared Function callbackfn(ByVal wparam As Integer, ByVal lparam As Integer, ByVal userval As Integer) As Integer
         Select Case wparam
             Case DTWAINAPI.DTWAIN_TN_QUERYPAGEDISCARD
-                If thisObject.ShowPreview.Checked Then
+                If thisObject.MenuItemShowPreview.Checked Then
                     Dim sDIBDlg As New DibDisplayerDlg2(DTWAINAPI.DTWAIN_GetCurrentAcquiredImage(SelectedSource))
                     If sDIBDlg.ShowDialog() = DialogResult.Cancel Then
                         Return 0
@@ -362,7 +358,7 @@ Public Class VB_FullDemo
         Dim SourceName As New StringBuilder(256)
         Dim sTitle As New StringBuilder
         sTitle.Append(sOrigTitle)
-        If SelectedSource <> 0 Then
+        If SelectedSource <> CType(0, IntPtr) Then
             DTWAINAPI.DTWAIN_GetSourceProductName(SelectedSource, SourceName, 255)
             sTitle.Append(" - ")
             sTitle.Append(SourceName)
@@ -374,11 +370,11 @@ Public Class VB_FullDemo
 
     Private Sub SelectTheSource(ByVal nWhich As Long)
         Dim nReturn As Long
-        If SelectedSource <> 0 Then
+        If SelectedSource <> CType(0, IntPtr) Then
             nReturn = MessageBox.Show("For this demo, only one Source can be opened.  Close current Source?", "DTWAIN Message", MessageBoxButtons.YesNo)
             If nReturn = DialogResult.Yes Then
                 DTWAINAPI.DTWAIN_CloseSource(SelectedSource)
-                SelectedSource = 0
+                SelectedSource = CType(0, IntPtr)
             Else
                 Return
             End If
@@ -387,7 +383,7 @@ Public Class VB_FullDemo
         Select Case nWhich
             Case 0
                 Dim nullString As String
-                nullString = IntPtr.Zero
+                nullString = CStr(IntPtr.Zero)
                 SelectedSource = DTWAINAPI.DTWAIN_SelectSource2A(IntPtr.Zero, Nothing, 0, 0,
                                                                 DTWAINAPI.DTWAIN_DLG_CENTER_SCREEN Or DTWAINAPI.DTWAIN_DLG_TOPMOSTWINDOW)
             Case 1
@@ -406,7 +402,7 @@ Public Class VB_FullDemo
                 End If
         End Select
         Me.Enabled = True
-        If SelectedSource <> 0 Then
+        If SelectedSource <> CType(0, IntPtr) Then
             If DTWAINAPI.DTWAIN_OpenSource(SelectedSource) <> 0 Then
                 DTWAINAPI.DTWAIN_EnableFeeder(SelectedSource, 1)
                 SetCaptionToSourceName()
@@ -432,22 +428,6 @@ Public Class VB_FullDemo
         End If
     End Sub
 
-    Private Sub SelectSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectSource.Click
-        SelectTheSource(0)
-        Focus()
-    End Sub
-
-    Private Sub Acquire_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.Enabled = False
-        Dim Status As Integer
-        If SelectedSource <> 0 Then
-            If DTWAINAPI.DTWAIN_AcquireToClipboard(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, DTWAINAPI.DTWAIN_USENATIVE, 1, 1, 0, Status) Then
-                'setting clipboard data to picturebox 
-                Me.Focus()
-            End If
-        End If
-        Me.Enabled = True
-    End Sub
 
     Public Function GetImageFromClipboard() As Image
         If Not Clipboard.GetDataObject() Is Nothing Then
@@ -460,53 +440,16 @@ Public Class VB_FullDemo
     End Function
 
 
-    Private Sub ExitApp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitDemo.Click
-        Dispose(True)
-    End Sub
-
-    Private Sub AcquireToFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim Dlg As New FileTypeDlg()
-        Dlg.ShowDialog()
-        Dim FileName As String = Dlg.GetFileName()
-        Dim FileType As Integer = Dlg.GetFileType()
-        If FileType = -1 Then
-            Return
-        End If
-        Me.Enabled = False
-        Dim Status As Integer
-        If SelectedSource <> 0 Then
-            If DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, FileName, FileType,
-                                            DTWAINAPI.DTWAIN_USENATIVE + DTWAINAPI.DTWAIN_USELONGNAME + DTWAINAPI.DTWAIN_CREATE_DIRECTORY,
-                                            DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, 1, 0, Status) Then
-                MsgBox(FileName + " has been created")
-            Else
-                Dim numFiles As Integer
-                numFiles = DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource)
-                If numFiles = 0 Then
-                    MessageBox.Show("No files were acquired", "TWAIN Info", MessageBoxButtons.OK)
-                End If
-            End If
-        End If
-        Me.Enabled = True
-    End Sub
-
-    Private Sub SourceProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SourceProperties.Click
-        If SelectedSource <> 0 Then
-            Dim sPropDlg As SourcePropertiesDlg
-            sPropDlg = New SourcePropertiesDlg(SelectedSource)
-            sPropDlg.ShowDialog()
-        End If
-    End Sub
     Private Sub GenericAcquire(ByVal nWhich As Integer)
-        If SelectedSource <> 0 Then
+        If SelectedSource <> CType(0, IntPtr) Then
             Dim isChecked As Integer
             Dim isUI As Integer
             isChecked = 0
             isUI = 0
-            If DiscardBlankPages.Checked Then
+            If MenuItemDiscardBlankPages.Checked Then
                 isChecked = 1
             End If
-            If UseSourceUI.Checked Then
+            If MenuItemUseSourceUI.Checked Then
                 isUI = 1
             End If
 
@@ -547,14 +490,8 @@ Public Class VB_FullDemo
         End If
     End Sub
 
-    Private Sub AcquireNative_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireNative.Click
-        GenericAcquire(0)
-    End Sub
-    Private Sub AcquireBuffered_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireBuffered.Click
-        GenericAcquire(1)
-    End Sub
     Private Sub AcquireToFile(ByVal nWhich As Integer)
-        If SelectedSource <> 0 Then
+        If SelectedSource <> CType(0, IntPtr) Then
             Dim status As Integer = 0
             Dim bError As Integer = 0
             Dim FileFlags As Long = 0
@@ -616,101 +553,70 @@ Public Class VB_FullDemo
         End If
     End Sub
 
-    Private Sub SelectSourceByName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectSourceByName.Click
+    Private Sub ExitApp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemExitDemo.Click
+        Dispose(True)
+    End Sub
+
+
+    Private Sub SourceProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSourceProperties.Click
+        If SelectedSource <> CType(0, IntPtr) Then
+            Dim sPropDlg As SourcePropertiesDlg
+            sPropDlg = New SourcePropertiesDlg(SelectedSource)
+            sPropDlg.ShowDialog()
+        End If
+    End Sub
+
+    Private Sub SelectSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSelectSource.Click
+        SelectTheSource(0)
+        Focus()
+    End Sub
+
+    Private Sub SelectSourceByName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSelectSourceByName.Click
         SelectTheSource(1)
         Focus()
     End Sub
 
-    Private Sub SelectSourceCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectSourceCustom.Click
+    Private Sub SelectSourceCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSelectSourceCustom.Click
         SelectTheSource(3)
         Focus()
     End Sub
 
-    Private Sub SelectDefaultSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SelectDefaultSource.Click
+    Private Sub SelectDefaultSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSelectDefaultSource.Click
         SelectTheSource(2)
         Focus()
     End Sub
 
-    Private Sub EnableSourceItems(ByVal bEnable As Boolean)
-        SourceProperties.Enabled = bEnable
-        CloseSource.Enabled = bEnable
-        AcquireNative.Enabled = bEnable
-        AcquireBuffered.Enabled = bEnable
-        AcquireFile.Enabled = bEnable
-        AcquireFileUsingDriver.Enabled = bEnable
-    End Sub
-
-    Private Sub CloseSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CloseSource.Click
-        If SelectedSource <> 0 Then
+    Private Sub CloseSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemCloseSource.Click
+        If SelectedSource <> CType(0, IntPtr) Then
             DTWAINAPI.DTWAIN_CloseSource(SelectedSource)
-            SelectedSource = 0
+            SelectedSource = CType(0, IntPtr)
             SetCaptionToSourceName()
             EnableSourceItems(False)
         End If
     End Sub
 
+    Private Sub EnableSourceItems(ByVal bEnable As Boolean)
+        MenuItemSourceProperties.Enabled = bEnable
+        MenuItemCloseSource.Enabled = bEnable
+        MenuItemAcquireNative.Enabled = bEnable
+        MenuItemAcquireBuffered.Enabled = bEnable
+        MenuItemAcquireFile.Enabled = bEnable
+        MenuItemAcquireFileUsingDriver.Enabled = bEnable
+    End Sub
+
     Private Function IsDiscardPages() As Integer
-        If DiscardBlankPages.Enabled Then
+        If MenuItemDiscardBlankPages.Enabled Then
             Return 1
         End If
         Return 0
     End Function
 
     Private Function IsSourceUI() As Integer
-        If UseSourceUI.Checked Then
+        If MenuItemUseSourceUI.Checked Then
             Return 1
         End If
         Return 0
     End Function
-
-
-
-    Private Sub AcquireFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireFile.Click
-        AcquireToFile(0)
-    End Sub
-
-    Private Sub UseSourceUI_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles UseSourceUI.Click
-        UseSourceUI.Checked = Not UseSourceUI.Checked
-    End Sub
-
-    Private Sub AcquireFileUsingDriver_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AcquireFileUsingDriver.Click
-        AcquireToFile(1)
-    End Sub
-
-    Private Sub LoggingOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LoggingOptions.Click
-        Dim LogFlags As Long = DTWAINAPI.DTWAIN_LOG_ALL And Not DTWAINAPI.DTWAIN_LOG_ERRORMSGBOX
-        Dim logDlg As New LogFileSelectionDlg(1)
-        Dim nResult As DialogResult = logDlg.ShowDialog()
-        If nResult = DialogResult.OK Then
-            Dim debugOption As Integer = logDlg.GetDebugOption()
-            DTWAINAPI.DTWAIN_SetTwainLog(0, "")
-            Select Case debugOption
-                Case 0
-                    Exit Select
-                Case 1
-                    Exit Select
-                Case 2
-                    DTWAINAPI.DTWAIN_SetTwainLog(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE, logDlg.GetFileName())
-                    Exit Select
-                Case 3
-                    DTWAINAPI.DTWAIN_SetTwainLog(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE, "")
-                    Exit Select
-            End Select
-        End If
-    End Sub
-
-    Private Sub ShowPreview_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ShowPreview.Click
-        ShowPreview.Checked = Not ShowPreview.Checked
-    End Sub
-
-    Private Sub DiscardBlankPages_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DiscardBlankPages.Click
-        DiscardBlankPages.Checked = Not DiscardBlankPages.Checked
-    End Sub
-
-    Private Sub DTWAINVersion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DTWAINVersion.Click
-        Dim aDlg As New AboutDlg()
-        aDlg.ShowDialog()
-    End Sub
 
     Private Sub LoadLanguage(ByVal lang As String)
         Dim retVal As Integer
@@ -721,51 +627,129 @@ Public Class VB_FullDemo
             MessageBox.Show("Language " + " loaded successfully.  Select a Source or choose Logging/Log To Console to see the results")
         End If
     End Sub
-    Private Sub MenuItem4_Click(sender As Object, e As EventArgs) Handles menuDutch.Click
-        LoadLanguage("dutch")
+
+
+
+
+
+
+
+
+
+    Private Sub SourceSelectionTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+
     End Sub
 
-    Private Sub menuEnglish_Click(sender As Object, e As EventArgs) Handles menuEnglish.Click
-        LoadLanguage("english")
+    Private Sub AcquireTest_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
+        Handles MenuItemAcquireBuffered.Click, MenuItemAcquireNative.Click, MenuItemAcquireFile.Click,
+        MenuItemUseSourceUI.Click, MenuItemAcquireFileUsingDriver.Click, MenuItemShowPreview.Click, MenuItemDiscardBlankPages.Click
+
+        Select Case True
+            Case sender Is MenuItemAcquireBuffered
+                Me.Enabled = False
+                Dim Status As Integer
+                If SelectedSource <> CType(0, IntPtr) Then
+                    If CBool(DTWAINAPI.DTWAIN_AcquireToClipboard(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, DTWAINAPI.DTWAIN_USENATIVE, 1, 1, 0, Status)) Then
+                        'setting clipboard data to picturebox 
+                        Me.Focus()
+                    End If
+                End If
+                Me.Enabled = True
+
+            Case sender Is MenuItemAcquireNative : GenericAcquire(0)
+            Case sender Is MenuItemAcquireFile
+                Dim Dlg As New FileTypeDlg()
+                Dlg.ShowDialog()
+                Dim FileName As String = Dlg.GetFileName()
+                Dim FileType As Integer = Dlg.GetFileType()
+                If FileType = -1 Then
+                    Return
+                End If
+                Me.Enabled = False
+                Dim Status As Integer
+                If SelectedSource <> CType(0, IntPtr) Then
+                    If CBool(DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, FileName, FileType,
+                                            DTWAINAPI.DTWAIN_USENATIVE + DTWAINAPI.DTWAIN_USELONGNAME + DTWAINAPI.DTWAIN_CREATE_DIRECTORY,
+                                            DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, 1, 0, Status)) Then
+                        MsgBox(FileName + " has been created")
+                    Else
+                        Dim numFiles As Integer
+                        numFiles = DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource)
+                        If numFiles = 0 Then
+                            MessageBox.Show("No files were acquired", "TWAIN Info", MessageBoxButtons.OK)
+                        End If
+                    End If
+                End If
+                Me.Enabled = True
+
+            Case sender Is MenuItemUseSourceUI : MenuItemUseSourceUI.Checked = Not MenuItemUseSourceUI.Checked
+            Case sender Is MenuItemAcquireFileUsingDriver : AcquireToFile(1)
+            Case sender Is MenuItemShowPreview : MenuItemShowPreview.Checked = Not MenuItemShowPreview.Checked
+            Case sender Is MenuItemDiscardBlankPages : MenuItemDiscardBlankPages.Checked = Not MenuItemDiscardBlankPages.Checked
+        End Select
+
     End Sub
 
-    Private Sub menuFrench_Click(sender As Object, e As EventArgs) Handles menuFrench.Click
-        LoadLanguage("french")
-    End Sub
+    Private Sub MenuItemLoggingOptions_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
+        Handles MenuItemLoggingOptions.Click
 
-    Private Sub menuGerman_Click(sender As Object, e As EventArgs) Handles menuGerman.Click
-        LoadLanguage("german")
-    End Sub
+        Dim LogFlags As Long = DTWAINAPI.DTWAIN_LOG_ALL And Not DTWAINAPI.DTWAIN_LOG_ERRORMSGBOX
+        Dim logDlg As New LogFileSelectionDlg(1)
+        Dim nResult As DialogResult = logDlg.ShowDialog()
 
-    Private Sub menuItalian_Click(sender As Object, e As EventArgs) Handles menuItalian.Click
-        LoadLanguage("italian")
-    End Sub
-
-    Private Sub menuPortuguese_Click(sender As Object, e As EventArgs) Handles menuPortuguese.Click
-        LoadLanguage("portuguese")
-    End Sub
-
-    Private Sub menuRomanian_Click(sender As Object, e As EventArgs) Handles menuRomanian.Click
-        LoadLanguage("romanian")
-    End Sub
-
-    Private Sub menuRussian_Click(sender As Object, e As EventArgs) Handles menuRussian.Click
-        LoadLanguage("russian")
-    End Sub
-
-    Private Sub menuSimplifiedChinese_Click(sender As Object, e As EventArgs) Handles menuSimplifiedChinese.Click
-        LoadLanguage("simplified_chinese")
-    End Sub
-
-    Private Sub menuSpanish_Click(sender As Object, e As EventArgs) Handles menuSpanish.Click
-        LoadLanguage("spanish")
-    End Sub
-
-    Private Sub menuCustomLanguage_Click(sender As Object, e As EventArgs) Handles menuCustomLanguage.Click
-        Dim objCustomLanguage As CustomLanguageDlg = New CustomLanguageDlg()
-        Dim nResult As DialogResult = objCustomLanguage.ShowDialog()
         If nResult = DialogResult.OK Then
-            LoadLanguage(objCustomLanguage.GetText())
+            Dim debugOption As Integer = logDlg.GetDebugOption()
+            DTWAINAPI.DTWAIN_SetTwainLog(0, "")
+
+            Select Case debugOption
+                Case 0
+                    Exit Select
+                Case 1
+                    Exit Select
+                Case 2
+                    DTWAINAPI.DTWAIN_SetTwainLog(CUInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName())
+                    Exit Select
+                Case 3
+                    DTWAINAPI.DTWAIN_SetTwainLog(CUInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE), "")
+                    Exit Select
+            End Select
+
         End If
+
     End Sub
+
+    Private Sub MenuItemLanguage_Click(sender As Object, e As EventArgs) _
+        Handles MenuItemSpanish.Click, MenuItemCustomLanguage.Click, MenuItemSimplifiedChinese.Click,
+        MenuItemRussian.Click, MenuItemRomanian.Click, MenuItemPortuguese.Click, MenuItemItalian.Click,
+        MenuItemGerman.Click, MenuItemFrench.Click, MenuItemEnglish.Click, MenuItemDutch.Click
+
+        Select Case True
+            Case sender Is MenuItemDutch : LoadLanguage("dutch")
+            Case sender Is MenuItemEnglish : LoadLanguage("english")
+            Case sender Is MenuItemFrench : LoadLanguage("french")
+            Case sender Is MenuItemGerman : LoadLanguage("german")
+            Case sender Is MenuItemItalian : LoadLanguage("italian")
+            Case sender Is MenuItemPortuguese : LoadLanguage("portuguese")
+            Case sender Is MenuItemRomanian : LoadLanguage("romanian")
+            Case sender Is MenuItemRussian : LoadLanguage("russian")
+            Case sender Is MenuItemSimplifiedChinese : LoadLanguage("simplified_chinese")
+            Case sender Is MenuItemSpanish : LoadLanguage("spanish")
+            Case sender Is MenuItemCustomLanguage
+                Dim objCustomLanguage As CustomLanguageDlg = New CustomLanguageDlg()
+                Dim nResult As DialogResult = objCustomLanguage.ShowDialog()
+                If nResult = DialogResult.OK Then
+                    LoadLanguage(objCustomLanguage.GetText())
+                End If
+        End Select
+
+    End Sub
+
+    Private Sub MenuItemDTWAINVersion_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) _
+        Handles MenuItemDTWAINVersion.Click
+
+        Dim aDlg As New AboutDlg()
+        aDlg.ShowDialog()
+
+    End Sub
+
 End Class

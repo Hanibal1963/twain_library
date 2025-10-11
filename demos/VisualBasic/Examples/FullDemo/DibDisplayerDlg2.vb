@@ -16,7 +16,7 @@ Public Class DibDisplayerDlg2
 
     Private Sub DisplayTheDib()
         Me.dibBox2.Image = Bitmap.FromHbitmap(DTWAINAPI.DTWAIN_ConvertDIBToBitmap(theDib, System.IntPtr.Zero), System.IntPtr.Zero)
-        curBMP = Me.dibBox2.Image
+        curBMP = CType(Me.dibBox2.Image, Bitmap)
     End Sub
 
     Private Sub DibDisplayerDlg2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load

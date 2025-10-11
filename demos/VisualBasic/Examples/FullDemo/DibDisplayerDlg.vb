@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms
+﻿
+Imports System.Windows.Forms
 Imports System.Drawing
 Imports System.Reflection
 Imports System.Runtime.InteropServices
@@ -41,9 +42,9 @@ Public Class DibDisplayerDlg
             Me.dibBox.Image = DibDictionary.Item(keyCurrent)
         Else
             dib = DTWAINAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib)
-            If dib <> 0 Then
+            If dib <> CType(0, IntPtr) Then
                 Me.dibBox.Image = BitmapFromDIB(dib)
-                DibDictionary.Add(keyCurrent, Me.dibBox.Image)
+                DibDictionary.Add(keyCurrent, CType(Me.dibBox.Image, Bitmap))
             Else
                 MessageBox.Show("Image was discarded or not available", "Image not available")
             End If

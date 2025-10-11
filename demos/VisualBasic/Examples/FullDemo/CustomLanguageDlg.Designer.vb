@@ -74,6 +74,7 @@ Partial Class CustomLanguageDlg
         Me.Controls.Add(Me.label1)
         Me.Controls.Add(Me.textCustomLanguageName)
         Me.Name = "CustomLanguageDlg"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Custom Language"
         Me.ResumeLayout(False)
         Me.PerformLayout()

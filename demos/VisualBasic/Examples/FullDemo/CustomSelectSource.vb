@@ -1,4 +1,5 @@
-﻿Imports System.Windows.Forms
+﻿Imports System.Diagnostics
+Imports System.Windows.Forms
 
 Public Class CustomSelectSource
     Private sourceSelected As Boolean
@@ -11,10 +12,12 @@ Public Class CustomSelectSource
     End Function
 
     Private Sub CustomSelectSource_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
         sourceSelected = False
         Dim SourceArray As System.IntPtr
         DTWAINAPI.DTWAIN_EnumSources(SourceArray)
         Dim nCount As Integer = DTWAINAPI.DTWAIN_ArrayGetCount(SourceArray)
+
         If nCount <= 0 Then
             Close()
         End If
@@ -27,10 +30,16 @@ Public Class CustomSelectSource
             DTWAINAPI.DTWAIN_GetSourceProductName(CurSource, szName, 255)
             listSources.Items.Add(szName.ToString())
         Next
-        listSources.SelectedIndex = 0
-        ' Display Info about sources
-        Dim sText As String = nCount.ToString() & " TWAIN Source(s) Available for Selection"
-        editSourceInfo.Text = sText
+
+        If listSources.Items.Count > 0 Then
+            listSources.SelectedIndex = 0
+            ' Display Info about sources
+            Dim sText As String = nCount.ToString() & " TWAIN Source(s) Available for Selection"
+            editSourceInfo.Text = sText
+        Else
+            Exit Sub
+        End If
+
     End Sub
 
     Private Sub btnSelect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSelect.Click

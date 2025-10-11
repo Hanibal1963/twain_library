@@ -1,4 +1,6 @@
-﻿Imports System.Text
+﻿Option Strict Off
+
+Imports System.Text
 
 
 Public Class SourcePropertiesDlg

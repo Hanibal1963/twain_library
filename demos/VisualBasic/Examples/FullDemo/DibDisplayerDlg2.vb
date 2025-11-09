@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports System.Drawing
-Imports System.Reflection
+﻿Imports System.Drawing
 Imports System.Runtime.InteropServices
 
 Public Class DibDisplayerDlg2
@@ -10,21 +8,21 @@ Public Class DibDisplayerDlg2
 
 
     Public Sub New(ByVal item As System.IntPtr)
-        InitializeComponent() ' This call is required by the Windows Form Designer.
-        theDib = item
+        Me.InitializeComponent() ' This call is required by the Windows Form Designer.
+        Me.theDib = item
     End Sub
 
     Private Sub DisplayTheDib()
-        Me.dibBox2.Image = Bitmap.FromHbitmap(DTWAINAPI.DTWAIN_ConvertDIBToBitmap(theDib, System.IntPtr.Zero), System.IntPtr.Zero)
-        curBMP = CType(Me.dibBox2.Image, Bitmap)
+        Me.dibBox2.Image = Bitmap.FromHbitmap(DTWAINAPI.DTWAIN_ConvertDIBToBitmap(Me.theDib, System.IntPtr.Zero), System.IntPtr.Zero)
+        Me.curBMP = CType(Me.dibBox2.Image, Bitmap)
     End Sub
 
     Private Sub DibDisplayerDlg2_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        DisplayTheDib()
+        Me.DisplayTheDib()
     End Sub
 
     Private Sub DibDisplayerDlg2_Unload(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Closed
-        DeleteObject(curBMP.GetHbitmap())
+        Dim unused As Boolean = DeleteObject(Me.curBMP.GetHbitmap())
     End Sub
 
 End Class

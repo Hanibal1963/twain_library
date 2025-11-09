@@ -1,9 +1,8 @@
 ﻿
-Imports System.Windows.Forms
-Imports System.Drawing
-Imports System.Reflection
-Imports System.Runtime.InteropServices
 Imports System.Collections.Generic
+Imports System.Drawing
+Imports System.Runtime.InteropServices
+Imports System.Windows.Forms
 
 Public Class DibDisplayerDlg
     Declare Auto Function DeleteObject Lib "gdi32.dll" (hObject As IntPtr) As <MarshalAs(UnmanagedType.Bool)> Boolean
@@ -19,8 +18,8 @@ Public Class DibDisplayerDlg
     Private DibDictionary As Dictionary(Of DibInfo, Bitmap) = New Dictionary(Of DibInfo, Bitmap)
 
     Public Sub New(ByVal item As System.IntPtr)
-        InitializeComponent() ' This call is required by the Windows Form Designer.
-        AcquireArray = item
+        Me.InitializeComponent() ' This call is required by the Windows Form Designer.
+        Me.AcquireArray = item
     End Sub
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
@@ -36,20 +35,20 @@ Public Class DibDisplayerDlg
     Private Sub DisplayTheDib()
         Dim keyCurrent As New DibInfo()
         Dim dib As System.IntPtr
-        keyCurrent.pageNum = nCurDib
-        keyCurrent.acquisition = nCurrentAcquisition
-        If DibDictionary.ContainsKey(keyCurrent) Then
-            Me.dibBox.Image = DibDictionary.Item(keyCurrent)
+        keyCurrent.pageNum = Me.nCurDib
+        keyCurrent.acquisition = Me.nCurrentAcquisition
+        If Me.DibDictionary.ContainsKey(keyCurrent) Then
+            Me.dibBox.Image = Me.DibDictionary.Item(keyCurrent)
         Else
-            dib = DTWAINAPI.DTWAIN_GetAcquiredImage(AcquireArray, nCurrentAcquisition, nCurDib)
+            dib = DTWAINAPI.DTWAIN_GetAcquiredImage(Me.AcquireArray, Me.nCurrentAcquisition, Me.nCurDib)
             If dib <> CType(0, IntPtr) Then
                 Me.dibBox.Image = BitmapFromDIB(dib)
-                DibDictionary.Add(keyCurrent, CType(Me.dibBox.Image, Bitmap))
+                Me.DibDictionary.Add(keyCurrent, CType(Me.dibBox.Image, Bitmap))
             Else
-                MessageBox.Show("Image was discarded or not available", "Image not available")
+                Dim unused As DialogResult = MessageBox.Show("Image was discarded or not available", "Image not available")
             End If
         End If
-        EnablePageButtons()
+        Me.EnablePageButtons()
     End Sub
 
     Private Shared Function BitmapFromDIB(ByVal pDIB As IntPtr) As Bitmap
@@ -57,50 +56,50 @@ Public Class DibDisplayerDlg
     End Function
 
     Private Sub EnablePageButtons()
-        Dim nCount As Integer = DTWAINAPI.DTWAIN_GetNumAcquiredImages(AcquireArray, nCurrentAcquisition)
-        Me.buttonNext.Enabled = (nCurDib < nCount - 1)
-        Me.buttonPrev.Enabled = (nCurDib > 0)
+        Dim nCount As Integer = DTWAINAPI.DTWAIN_GetNumAcquiredImages(Me.AcquireArray, Me.nCurrentAcquisition)
+        Me.buttonNext.Enabled = Me.nCurDib < nCount - 1
+        Me.buttonPrev.Enabled = Me.nCurDib > 0
 
         If nCount = 0 Then
         Else
-            Dim sDib As Integer = nCurDib + 1
+            Dim sDib As Integer = Me.nCurDib + 1
             Me.edPageCurrent.Text = sDib.ToString()
             Me.edPageTotal.Text = nCount.ToString()
         End If
     End Sub
     Private Sub DibDisplayerDlg_Unload(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Closed
-        For Each pair As KeyValuePair(Of DibInfo, Bitmap) In DibDictionary
-            DeleteObject(pair.Value.GetHbitmap())
+        For Each pair As KeyValuePair(Of DibInfo, Bitmap) In Me.DibDictionary
+            Dim unused1 As Boolean = DeleteObject(pair.Value.GetHbitmap())
         Next
-        DTWAINAPI.DTWAIN_DestroyAcquisitionArray(AcquireArray, 1)
+        Dim unused As Integer = DTWAINAPI.DTWAIN_DestroyAcquisitionArray(Me.AcquireArray, 1)
     End Sub
 
     Private Sub DibDisplayerDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        nCurrentAcquisition = 0
-        nCurDib = 0
-        Dim nCount As Integer = DTWAINAPI.DTWAIN_GetNumAcquisitions(AcquireArray)
+        Me.nCurrentAcquisition = 0
+        Me.nCurDib = 0
+        Dim nCount As Integer = DTWAINAPI.DTWAIN_GetNumAcquisitions(Me.AcquireArray)
         For i As Integer = 1 To nCount
-            Me.cmbAcquisition.Items.Add(i.ToString())
+            Dim unused As Integer = Me.cmbAcquisition.Items.Add(i.ToString())
             Me.cmbAcquisition.SelectedIndex = 0
         Next i
-        DisplayTheDib()
+        Me.DisplayTheDib()
     End Sub
 
-    Private Sub buttonNext_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonNext.Click
-        nCurDib += 1
-        DisplayTheDib()
+    Private Sub ButtonNext_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonNext.Click
+        Me.nCurDib += 1
+        Me.DisplayTheDib()
     End Sub
 
-    Private Sub buttonPrev_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonPrev.Click
-        nCurDib -= 1
-        DisplayTheDib()
+    Private Sub ButtonPrev_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles buttonPrev.Click
+        Me.nCurDib -= 1
+        Me.DisplayTheDib()
     End Sub
 
-    Private Sub cmbAcquisition_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAcquisition.SelectedIndexChanged
-        If Me.cmbAcquisition.SelectedIndex <> nCurrentAcquisition Then
-            nCurrentAcquisition = Me.cmbAcquisition.SelectedIndex
-            nCurDib = 0
-            DisplayTheDib()
+    Private Sub CmbAcquisition_SelectedIndexChanged_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbAcquisition.SelectedIndexChanged
+        If Me.cmbAcquisition.SelectedIndex <> Me.nCurrentAcquisition Then
+            Me.nCurrentAcquisition = Me.cmbAcquisition.SelectedIndex
+            Me.nCurDib = 0
+            Me.DisplayTheDib()
         End If
     End Sub
 End Class

@@ -1,6 +1,4 @@
-﻿Imports System.Windows.Forms
-
-Public Class SelectSourceByName
+﻿Public Class SelectSourceByName
 
     Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.DialogResult = System.Windows.Forms.DialogResult.OK

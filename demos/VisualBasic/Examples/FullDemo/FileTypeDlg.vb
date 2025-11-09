@@ -1,15 +1,13 @@
-﻿Imports System.Windows.Forms
-
-Public Class FileTypeDlg
+﻿Public Class FileTypeDlg
 
     Private Class AllTypes
         Public fType As String
         Public DTWAINType As Integer
         Public defFileName As String
         Public Sub New(ByVal s1 As String, ByVal dType As Integer, ByVal s2 As String)
-            fType = s1
-            DTWAINType = dType
-            defFileName = s2
+            Me.fType = s1
+            Me.DTWAINType = dType
+            Me.defFileName = s2
         End Sub
     End Class
 
@@ -18,17 +16,17 @@ Public Class FileTypeDlg
 
 
     Public Sub New()
-        selectedFileType = DTWAINAPI.DTWAIN_BMP
-        selectedFileName = "test.bmp"
-        InitializeComponent()
+        Me.selectedFileType = DTWAINAPI.DTWAIN_BMP
+        Me.selectedFileName = "test.bmp"
+        Me.InitializeComponent()
     End Sub
 
     Public Function GetFileType() As Integer
-        Return selectedFileType
+        Return Me.selectedFileType
     End Function
 
     Public Function GetFileName() As String
-        Return selectedFileName
+        Return Me.selectedFileName
     End Function
 
     Private g_allTypes As AllTypes() =
@@ -68,23 +66,23 @@ Public Class FileTypeDlg
      New AllTypes("Windows ICON File- Vista compatible (ICO)", DTWAINAPI.DTWAIN_ICO_VISTA, "test.ico"),
      New AllTypes("Wireless Bitmap File (WBMP)", DTWAINAPI.DTWAIN_WBMP_RESIZED, "test.wbmp")}
 
-    Private Sub cmbFileType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFileType.SelectedIndexChanged
-        Dim nCurSel As Integer = cmbFileType.SelectedIndex
-        edFileName.Text = g_allTypes(nCurSel).defFileName
+    Private Sub CmbFileType_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmbFileType.SelectedIndexChanged
+        Dim nCurSel As Integer = Me.cmbFileType.SelectedIndex
+        Me.edFileName.Text = Me.g_allTypes(nCurSel).defFileName
     End Sub
 
     Private Sub FileTypeDlg_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        Dim nTypes As Integer = g_allTypes.Length
+        Dim nTypes As Integer = Me.g_allTypes.Length
         For i As Integer = 0 To nTypes - 1
-            cmbFileType.Items.Add(g_allTypes(i).fType)
+            Dim unused As Integer = Me.cmbFileType.Items.Add(Me.g_allTypes(i).fType)
         Next
-        cmbFileType.SelectedIndex = 0
-        edFileName.Text = g_allTypes(0).defFileName
+        Me.cmbFileType.SelectedIndex = 0
+        Me.edFileName.Text = Me.g_allTypes(0).defFileName
     End Sub
 
     Private Sub OKbutton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OKbutton.Click
-        Dim nCurSel As Integer = cmbFileType.SelectedIndex
-        selectedFileType = g_allTypes(nCurSel).DTWAINType
-        selectedFileName = edFileName.Text
+        Dim nCurSel As Integer = Me.cmbFileType.SelectedIndex
+        Me.selectedFileType = Me.g_allTypes(nCurSel).DTWAINType
+        Me.selectedFileName = Me.edFileName.Text
     End Sub
 End Class

@@ -1,9 +1,6 @@
 Imports System.Drawing
-Imports System
-Imports System.Windows.Forms
-Imports System.Runtime.InteropServices
 Imports System.Text
-Imports System.Diagnostics
+Imports System.Windows.Forms
 
 Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
 
@@ -12,16 +9,16 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
     Public Sub New()
         MyBase.New()
         thisObject = Me
-        InitializeComponent()
+        Me.InitializeComponent()
     End Sub
 
     'Form overrides dispose to clean up the component list.
     Protected Overloads Overrides Sub Dispose(ByVal disposing As Boolean)
         If disposing Then
-            If dllExists = True Then
-                DTWAINAPI.DTWAIN_SysDestroy()
-                If Not (components Is Nothing) Then
-                    components.Dispose()
+            If Me.dllExists = True Then
+                Dim unused As Integer = DTWAINAPI.DTWAIN_SysDestroy()
+                If Me.components IsNot Nothing Then
+                    Me.components.Dispose()
                 End If
             End If
             MyBase.Dispose(disposing)
@@ -313,34 +310,34 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
     Private sOrigTitle As String
     Private Shared thisObject As VB_FullDemo
     Private dllExists As Boolean
-    Private Shared cb As DTWAINAPI.DTwainCallback = New DTWAINAPI.DTwainCallback(AddressOf callbackfn)
+    Private Shared cb As DTWAINAPI.DTwainCallback = New DTWAINAPI.DTwainCallback(AddressOf Callbackfn)
 
     Private Sub VB_FullDemo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         Me.MenuItemSelectSource.Enabled = False
-        dllExists = True
-        sOrigTitle = Me.Text
+        Me.dllExists = True
+        Me.sOrigTitle = Me.Text
         Try
-            TwainOK = DTWAINAPI.DTWAIN_IsTwainAvailable()
+            Me.TwainOK = DTWAINAPI.DTWAIN_IsTwainAvailable()
         Catch ex As System.DllNotFoundException
-            MessageBox.Show(ex.Message)
-            dllExists = False
-            Dispose()
+            Dim unused2 As DialogResult = MessageBox.Show(ex.Message)
+            Me.dllExists = False
+            Me.Dispose()
         End Try
         SelectedSource = CType(0, IntPtr)
-        If TwainOK <> 0 Then
-            TwainHandle = DTWAINAPI.DTWAIN_SysInitialize()
+        If Me.TwainOK <> 0 Then
+            Me.TwainHandle = DTWAINAPI.DTWAIN_SysInitialize()
             Me.MenuItemSelectSource.Enabled = True
-            If TwainHandle <> CType(0, IntPtr) Then
-                DTWAINAPI.DTWAIN_EnableMsgNotify(1)
-                DTWAINAPI.DTWAIN_SetCallback(cb, 0)
+            If Me.TwainHandle <> CType(0, IntPtr) Then
+                Dim unused1 As Integer = DTWAINAPI.DTWAIN_EnableMsgNotify(1)
+                Dim unused As DTWAINAPI.DTwainCallback = DTWAINAPI.DTWAIN_SetCallback(cb, 0)
             Else
                 Application.Exit()
             End If
         End If
-        EnableSourceItems(False)
+        Me.EnableSourceItems(False)
     End Sub
 
-    Public Shared Function callbackfn(ByVal wparam As Integer, ByVal lparam As Integer, ByVal userval As Integer) As Integer
+    Public Shared Function Callbackfn(ByVal wparam As Integer, ByVal lparam As Integer, ByVal userval As Integer) As Integer
         Select Case wparam
             Case DTWAINAPI.DTWAIN_TN_QUERYPAGEDISCARD
                 If thisObject.MenuItemShowPreview.Checked Then
@@ -357,14 +354,14 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
     Private Sub SetCaptionToSourceName()
         Dim SourceName As New StringBuilder(256)
         Dim sTitle As New StringBuilder
-        sTitle.Append(sOrigTitle)
+        Dim unused3 As StringBuilder = sTitle.Append(Me.sOrigTitle)
         If SelectedSource <> CType(0, IntPtr) Then
-            DTWAINAPI.DTWAIN_GetSourceProductName(SelectedSource, SourceName, 255)
-            sTitle.Append(" - ")
-            sTitle.Append(SourceName)
+            Dim unused2 As Integer = DTWAINAPI.DTWAIN_GetSourceProductName(SelectedSource, SourceName, 255)
+            Dim unused1 As StringBuilder = sTitle.Append(" - ")
+            Dim unused As StringBuilder = sTitle.Append(SourceName)
             Me.Text = sTitle.ToString
         Else
-            Me.Text = sOrigTitle
+            Me.Text = Me.sOrigTitle
         End If
     End Sub
 
@@ -373,7 +370,7 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
         If SelectedSource <> CType(0, IntPtr) Then
             nReturn = MessageBox.Show("For this demo, only one Source can be opened.  Close current Source?", "DTWAIN Message", MessageBoxButtons.YesNo)
             If nReturn = DialogResult.Yes Then
-                DTWAINAPI.DTWAIN_CloseSource(SelectedSource)
+                Dim unused5 As Integer = DTWAINAPI.DTWAIN_CloseSource(SelectedSource)
                 SelectedSource = CType(0, IntPtr)
             Else
                 Return
@@ -404,33 +401,33 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
         Me.Enabled = True
         If SelectedSource <> CType(0, IntPtr) Then
             If DTWAINAPI.DTWAIN_OpenSource(SelectedSource) <> 0 Then
-                DTWAINAPI.DTWAIN_EnableFeeder(SelectedSource, 1)
-                SetCaptionToSourceName()
-                EnableSourceItems(True)
+                Dim unused4 As Integer = DTWAINAPI.DTWAIN_EnableFeeder(SelectedSource, 1)
+                Me.SetCaptionToSourceName()
+                Me.EnableSourceItems(True)
                 Return
             Else
-                MessageBox.Show("Error Opening selected Source", "TWAIN Error", MessageBoxButtons.OK)
-                SetCaptionToSourceName()
-                EnableSourceItems(False)
+                Dim unused3 As DialogResult = MessageBox.Show("Error Opening selected Source", "TWAIN Error", MessageBoxButtons.OK)
+                Me.SetCaptionToSourceName()
+                Me.EnableSourceItems(False)
             End If
         Else
             Dim lastError As Integer
             lastError = DTWAINAPI.DTWAIN_GetLastError()
             If lastError = DTWAINAPI.DTWAIN_ERR_SOURCESELECTION_CANCELED Then
-                MessageBox.Show("Source selection canceled", "TWAIN Info", MessageBoxButtons.OK)
+                Dim unused2 As DialogResult = MessageBox.Show("Source selection canceled", "TWAIN Info", MessageBoxButtons.OK)
             Else
                 Dim szErr As StringBuilder = New StringBuilder(100)
-                DTWAINAPI.DTWAIN_GetErrorString(lastError, szErr, 100)
-                MessageBox.Show("Error Selecting and/or opening Source.\r\n" + szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK)
+                Dim unused1 As Integer = DTWAINAPI.DTWAIN_GetErrorString(lastError, szErr, 100)
+                Dim unused As DialogResult = MessageBox.Show("Error Selecting and/or opening Source.\r\n" + szErr.ToString(), "TWAIN Error", MessageBoxButtons.OK)
             End If
-            SetCaptionToSourceName()
-            EnableSourceItems(False)
+            Me.SetCaptionToSourceName()
+            Me.EnableSourceItems(False)
         End If
     End Sub
 
 
     Public Function GetImageFromClipboard() As Image
-        If Not Clipboard.GetDataObject() Is Nothing Then
+        If Clipboard.GetDataObject() IsNot Nothing Then
             Dim dobj As IDataObject = Clipboard.GetDataObject()
             If dobj.GetDataPresent(DataFormats.Bitmap) Then
                 Dim img_obj As Object = dobj.GetData(DataFormats.Bitmap)
@@ -446,14 +443,14 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
             Dim isUI As Integer
             isChecked = 0
             isUI = 0
-            If MenuItemDiscardBlankPages.Checked Then
+            If Me.MenuItemDiscardBlankPages.Checked Then
                 isChecked = 1
             End If
-            If MenuItemUseSourceUI.Checked Then
+            If Me.MenuItemUseSourceUI.Checked Then
                 isUI = 1
             End If
 
-            DTWAINAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5, DTWAINAPI.DTWAIN_BP_AUTODISCARD_ANY, isChecked)
+            Dim unused5 As Integer = DTWAINAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5, DTWAINAPI.DTWAIN_BP_AUTODISCARD_ANY, isChecked)
             Dim acquireArray As System.IntPtr = DTWAINAPI.DTWAIN_CreateAcquisitionArray()
             Me.Enabled = False
             Dim status As Integer = 0
@@ -466,12 +463,12 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
 
             If returnVal = 0 Then
                 If status = DTWAINAPI.DTWAIN_TN_ACQUIRECANCELLED Then
-                    MessageBox.Show("No Images acquired", "TWAIN Information")
+                    Dim unused4 As DialogResult = MessageBox.Show("No Images acquired", "TWAIN Information")
                 Else
                     Dim errorVal As Integer = DTWAINAPI.DTWAIN_GetLastError()
                     Dim errorString As StringBuilder = New StringBuilder(256)
-                    DTWAINAPI.DTWAIN_GetErrorString(errorVal, errorString, 255)
-                    MessageBox.Show(errorString.ToString(), "TWAIN Information")
+                    Dim unused3 As Integer = DTWAINAPI.DTWAIN_GetErrorString(errorVal, errorString, 255)
+                    Dim unused2 As DialogResult = MessageBox.Show(errorString.ToString(), "TWAIN Information")
                 End If
                 Me.Enabled = True
                 Return
@@ -479,13 +476,13 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
 
             Dim nCount As Integer = DTWAINAPI.DTWAIN_GetNumAcquisitions(acquireArray)
             If nCount = 0 Then
-                MessageBox.Show("No Images acquired", "TWAIN Information")
+                Dim unused1 As DialogResult = MessageBox.Show("No Images acquired", "TWAIN Information")
                 Me.Enabled = True
                 Return
             End If
 
             Dim sDIBDlg As DibDisplayerDlg = New DibDisplayerDlg(acquireArray)
-            sDIBDlg.ShowDialog()
+            Dim unused As DialogResult = sDIBDlg.ShowDialog()
             Me.Enabled = True
         End If
     End Sub
@@ -500,9 +497,9 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
             Select Case nWhich
                 Case 0
                     FileFlags = DTWAINAPI.DTWAIN_USELONGNAME Or DTWAINAPI.DTWAIN_USENATIVE
-                    DTWAINAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5, CInt(DTWAINAPI.DTWAIN_BP_AUTODISCARD_ANY), IsDiscardPages())
+                    Dim unused9 As Integer = DTWAINAPI.DTWAIN_SetBlankPageDetection(SelectedSource, 98.5, DTWAINAPI.DTWAIN_BP_AUTODISCARD_ANY, Me.IsDiscardPages())
                     Dim fDlg As New FileTypeDlg()
-                    fDlg.ShowDialog()
+                    Dim unused8 As DialogResult = fDlg.ShowDialog()
                     tFileName = fDlg.GetFileName()
                     Dim szSourceName As New StringBuilder(tFileName)
                     fileType = fDlg.GetFileType()
@@ -510,20 +507,20 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
 
                 Case 1
                     If DTWAINAPI.DTWAIN_IsFileXferSupported(SelectedSource, DTWAINAPI.DTWAIN_ANYSUPPORT) = 0 Then
-                        MessageBox.Show("Sorry.  The selected driver does Not have built-in file transfer support.")
+                        Dim unused7 As DialogResult = MessageBox.Show("Sorry.  The selected driver does Not have built-in file transfer support.")
                         Return
                     End If
                     If DTWAINAPI.DTWAIN_IsFileXferSupported(SelectedSource, DTWAINAPI.DTWAIN_FF_BMP) = 0 Then
                         Dim sText As String = "Sorry.  This demo program only supports built-in BMP file transfers." & vbCr & vbLf
                         sText += "However, the DTWAIN library will support all built-in formats if your driver" & vbCr & vbLf
                         sText += "supports other formats."
-                        MessageBox.Show(sText)
+                        Dim unused6 As DialogResult = MessageBox.Show(sText)
                         Return
                     End If
                     FileFlags = DTWAINAPI.DTWAIN_USESOURCEMODE Or DTWAINAPI.DTWAIN_USELONGNAME
                     fileType = DTWAINAPI.DTWAIN_FF_BMP
                     tFileName = ".\IMAGE.BMP"
-                    MessageBox.Show("The name of the image file that will be saved is IMAGE.BMP" & vbLf)
+                    Dim unused5 As DialogResult = MessageBox.Show("The name of the image file that will be saved is IMAGE.BMP" & vbLf)
                     Exit Select
             End Select
 
@@ -531,30 +528,30 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
             ' Get all pages 
             ' Close Source when UI is closed 
             Me.Enabled = False
-            bError = DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, tFileName, fileType, CInt(FileFlags + DTWAINAPI.DTWAIN_CREATE_DIRECTORY), DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, IsSourceUI(), 1, status)
+            bError = DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, tFileName, fileType, CInt(FileFlags + DTWAINAPI.DTWAIN_CREATE_DIRECTORY), DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, Me.IsSourceUI(), 1, status)
             Me.Enabled = True
 
             If bError = 0 Then
                 If status = DTWAINAPI.DTWAIN_TN_ACQUIRECANCELLED Then
-                    MessageBox.Show("No Images acquired", "TWAIN Information")
+                    Dim unused4 As DialogResult = MessageBox.Show("No Images acquired", "TWAIN Information")
                 Else
                     Dim errorVal As Integer = DTWAINAPI.DTWAIN_GetLastError()
                     Dim errorString As StringBuilder = New StringBuilder(256)
-                    DTWAINAPI.DTWAIN_GetErrorString(errorVal, errorString, 255)
-                    MessageBox.Show(errorString.ToString(), "TWAIN Information")
+                    Dim unused3 As Integer = DTWAINAPI.DTWAIN_GetErrorString(errorVal, errorString, 255)
+                    Dim unused2 As DialogResult = MessageBox.Show(errorString.ToString(), "TWAIN Information")
                 End If
                 Return
             End If
             If DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource) = 0 Then
-                MessageBox.Show("No files were saved")
+                Dim unused1 As DialogResult = MessageBox.Show("No files were saved")
             Else
-                MessageBox.Show("Image file saved successfully")
+                Dim unused As DialogResult = MessageBox.Show("Image file saved successfully")
             End If
         End If
     End Sub
 
     Private Sub ExitApp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemExitDemo.Click
-        Dispose(True)
+        Me.Dispose(True)
     End Sub
 
 
@@ -562,57 +559,57 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
         If SelectedSource <> CType(0, IntPtr) Then
             Dim sPropDlg As SourcePropertiesDlg
             sPropDlg = New SourcePropertiesDlg(SelectedSource)
-            sPropDlg.ShowDialog()
+            Dim unused As DialogResult = sPropDlg.ShowDialog()
         End If
     End Sub
 
     Private Sub SelectSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSelectSource.Click
-        SelectTheSource(0)
-        Focus()
+        Me.SelectTheSource(0)
+        Dim unused As Boolean = Me.Focus()
     End Sub
 
     Private Sub SelectSourceByName_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSelectSourceByName.Click
-        SelectTheSource(1)
-        Focus()
+        Me.SelectTheSource(1)
+        Dim unused As Boolean = Me.Focus()
     End Sub
 
     Private Sub SelectSourceCustom_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSelectSourceCustom.Click
-        SelectTheSource(3)
-        Focus()
+        Me.SelectTheSource(3)
+        Dim unused As Boolean = Me.Focus()
     End Sub
 
     Private Sub SelectDefaultSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemSelectDefaultSource.Click
-        SelectTheSource(2)
-        Focus()
+        Me.SelectTheSource(2)
+        Dim unused As Boolean = Me.Focus()
     End Sub
 
     Private Sub CloseSource_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MenuItemCloseSource.Click
         If SelectedSource <> CType(0, IntPtr) Then
-            DTWAINAPI.DTWAIN_CloseSource(SelectedSource)
+            Dim unused As Integer = DTWAINAPI.DTWAIN_CloseSource(SelectedSource)
             SelectedSource = CType(0, IntPtr)
-            SetCaptionToSourceName()
-            EnableSourceItems(False)
+            Me.SetCaptionToSourceName()
+            Me.EnableSourceItems(False)
         End If
     End Sub
 
     Private Sub EnableSourceItems(ByVal bEnable As Boolean)
-        MenuItemSourceProperties.Enabled = bEnable
-        MenuItemCloseSource.Enabled = bEnable
-        MenuItemAcquireNative.Enabled = bEnable
-        MenuItemAcquireBuffered.Enabled = bEnable
-        MenuItemAcquireFile.Enabled = bEnable
-        MenuItemAcquireFileUsingDriver.Enabled = bEnable
+        Me.MenuItemSourceProperties.Enabled = bEnable
+        Me.MenuItemCloseSource.Enabled = bEnable
+        Me.MenuItemAcquireNative.Enabled = bEnable
+        Me.MenuItemAcquireBuffered.Enabled = bEnable
+        Me.MenuItemAcquireFile.Enabled = bEnable
+        Me.MenuItemAcquireFileUsingDriver.Enabled = bEnable
     End Sub
 
     Private Function IsDiscardPages() As Integer
-        If MenuItemDiscardBlankPages.Enabled Then
+        If Me.MenuItemDiscardBlankPages.Enabled Then
             Return 1
         End If
         Return 0
     End Function
 
     Private Function IsSourceUI() As Integer
-        If MenuItemUseSourceUI.Checked Then
+        If Me.MenuItemUseSourceUI.Checked Then
             Return 1
         End If
         Return 0
@@ -622,9 +619,9 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
         Dim retVal As Integer
         retVal = DTWAINAPI.DTWAIN_LoadCustomStringResources(lang)
         If retVal = 0 Then
-            MessageBox.Show("Error loading custom resource " + lang)
+            Dim unused1 As DialogResult = MessageBox.Show("Error loading custom resource " + lang)
         Else
-            MessageBox.Show("Language " + " loaded successfully.  Select a Source or choose Logging/Log To Console to see the results")
+            Dim unused As DialogResult = MessageBox.Show("Language " + " loaded successfully.  Select a Source or choose Logging/Log To Console to see the results")
         End If
     End Sub
 
@@ -645,21 +642,21 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
         MenuItemUseSourceUI.Click, MenuItemAcquireFileUsingDriver.Click, MenuItemShowPreview.Click, MenuItemDiscardBlankPages.Click
 
         Select Case True
-            Case sender Is MenuItemAcquireBuffered
+            Case sender Is Me.MenuItemAcquireBuffered
                 Me.Enabled = False
                 Dim Status As Integer
                 If SelectedSource <> CType(0, IntPtr) Then
                     If CBool(DTWAINAPI.DTWAIN_AcquireToClipboard(SelectedSource, DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, DTWAINAPI.DTWAIN_USENATIVE, 1, 1, 0, Status)) Then
                         'setting clipboard data to picturebox 
-                        Me.Focus()
+                        Dim unused3 As Boolean = Me.Focus()
                     End If
                 End If
                 Me.Enabled = True
 
-            Case sender Is MenuItemAcquireNative : GenericAcquire(0)
-            Case sender Is MenuItemAcquireFile
+            Case sender Is Me.MenuItemAcquireNative : Me.GenericAcquire(0)
+            Case sender Is Me.MenuItemAcquireFile
                 Dim Dlg As New FileTypeDlg()
-                Dlg.ShowDialog()
+                Dim unused2 As DialogResult = Dlg.ShowDialog()
                 Dim FileName As String = Dlg.GetFileName()
                 Dim FileType As Integer = Dlg.GetFileType()
                 If FileType = -1 Then
@@ -671,21 +668,21 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
                     If CBool(DTWAINAPI.DTWAIN_AcquireFile(SelectedSource, FileName, FileType,
                                             DTWAINAPI.DTWAIN_USENATIVE + DTWAINAPI.DTWAIN_USELONGNAME + DTWAINAPI.DTWAIN_CREATE_DIRECTORY,
                                             DTWAINAPI.DTWAIN_PT_DEFAULT, DTWAINAPI.DTWAIN_ACQUIREALL, 1, 0, Status)) Then
-                        MsgBox(FileName + " has been created")
+                        Dim unused1 As MsgBoxResult = MsgBox(FileName + " has been created")
                     Else
                         Dim numFiles As Integer
                         numFiles = DTWAINAPI.DTWAIN_GetSavedFilesCount(SelectedSource)
                         If numFiles = 0 Then
-                            MessageBox.Show("No files were acquired", "TWAIN Info", MessageBoxButtons.OK)
+                            Dim unused As DialogResult = MessageBox.Show("No files were acquired", "TWAIN Info", MessageBoxButtons.OK)
                         End If
                     End If
                 End If
                 Me.Enabled = True
 
-            Case sender Is MenuItemUseSourceUI : MenuItemUseSourceUI.Checked = Not MenuItemUseSourceUI.Checked
-            Case sender Is MenuItemAcquireFileUsingDriver : AcquireToFile(1)
-            Case sender Is MenuItemShowPreview : MenuItemShowPreview.Checked = Not MenuItemShowPreview.Checked
-            Case sender Is MenuItemDiscardBlankPages : MenuItemDiscardBlankPages.Checked = Not MenuItemDiscardBlankPages.Checked
+            Case sender Is Me.MenuItemUseSourceUI : Me.MenuItemUseSourceUI.Checked = Not Me.MenuItemUseSourceUI.Checked
+            Case sender Is Me.MenuItemAcquireFileUsingDriver : Me.AcquireToFile(1)
+            Case sender Is Me.MenuItemShowPreview : Me.MenuItemShowPreview.Checked = Not Me.MenuItemShowPreview.Checked
+            Case sender Is Me.MenuItemDiscardBlankPages : Me.MenuItemDiscardBlankPages.Checked = Not Me.MenuItemDiscardBlankPages.Checked
         End Select
 
     End Sub
@@ -699,7 +696,7 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
 
         If nResult = DialogResult.OK Then
             Dim debugOption As Integer = logDlg.GetDebugOption()
-            DTWAINAPI.DTWAIN_SetTwainLog(0, "")
+            Dim unused2 As Integer = DTWAINAPI.DTWAIN_SetTwainLog(0, "")
 
             Select Case debugOption
                 Case 0
@@ -707,10 +704,10 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
                 Case 1
                     Exit Select
                 Case 2
-                    DTWAINAPI.DTWAIN_SetTwainLog(CUInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName())
+                    Dim unused1 As Integer = DTWAINAPI.DTWAIN_SetTwainLog(CUInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_USEFILE), logDlg.GetFileName())
                     Exit Select
                 Case 3
-                    DTWAINAPI.DTWAIN_SetTwainLog(CUInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE), "")
+                    Dim unused As Integer = DTWAINAPI.DTWAIN_SetTwainLog(CUInt(LogFlags Or DTWAINAPI.DTWAIN_LOG_CONSOLE), "")
                     Exit Select
             End Select
 
@@ -724,21 +721,21 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
         MenuItemGerman.Click, MenuItemFrench.Click, MenuItemEnglish.Click, MenuItemDutch.Click
 
         Select Case True
-            Case sender Is MenuItemDutch : LoadLanguage("dutch")
-            Case sender Is MenuItemEnglish : LoadLanguage("english")
-            Case sender Is MenuItemFrench : LoadLanguage("french")
-            Case sender Is MenuItemGerman : LoadLanguage("german")
-            Case sender Is MenuItemItalian : LoadLanguage("italian")
-            Case sender Is MenuItemPortuguese : LoadLanguage("portuguese")
-            Case sender Is MenuItemRomanian : LoadLanguage("romanian")
-            Case sender Is MenuItemRussian : LoadLanguage("russian")
-            Case sender Is MenuItemSimplifiedChinese : LoadLanguage("simplified_chinese")
-            Case sender Is MenuItemSpanish : LoadLanguage("spanish")
-            Case sender Is MenuItemCustomLanguage
+            Case sender Is Me.MenuItemDutch : Me.LoadLanguage("dutch")
+            Case sender Is Me.MenuItemEnglish : Me.LoadLanguage("english")
+            Case sender Is Me.MenuItemFrench : Me.LoadLanguage("french")
+            Case sender Is Me.MenuItemGerman : Me.LoadLanguage("german")
+            Case sender Is Me.MenuItemItalian : Me.LoadLanguage("italian")
+            Case sender Is Me.MenuItemPortuguese : Me.LoadLanguage("portuguese")
+            Case sender Is Me.MenuItemRomanian : Me.LoadLanguage("romanian")
+            Case sender Is Me.MenuItemRussian : Me.LoadLanguage("russian")
+            Case sender Is Me.MenuItemSimplifiedChinese : Me.LoadLanguage("simplified_chinese")
+            Case sender Is Me.MenuItemSpanish : Me.LoadLanguage("spanish")
+            Case sender Is Me.MenuItemCustomLanguage
                 Dim objCustomLanguage As CustomLanguageDlg = New CustomLanguageDlg()
                 Dim nResult As DialogResult = objCustomLanguage.ShowDialog()
                 If nResult = DialogResult.OK Then
-                    LoadLanguage(objCustomLanguage.GetText())
+                    Me.LoadLanguage(objCustomLanguage.GetText())
                 End If
         End Select
 
@@ -748,7 +745,7 @@ Public Class VB_FullDemo : Inherits System.Windows.Forms.Form
         Handles MenuItemDTWAINVersion.Click
 
         Dim aDlg As New AboutDlg()
-        aDlg.ShowDialog()
+        Dim unused As DialogResult = aDlg.ShowDialog()
 
     End Sub
 

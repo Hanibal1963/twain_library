@@ -1,33 +1,31 @@
-﻿Imports System.Windows.Forms
-
-Public Class LogFileSelectionDlg
+﻿Public Class LogFileSelectionDlg
 
     Private sFileName As String
     Private nWhichOption As Integer
 
     Public Sub New(ByVal item As Integer)
-        nWhichOption = 1
-        InitializeComponent() ' This call is required by the Windows Form Designer.
+        Me.nWhichOption = 1
+        Me.InitializeComponent() ' This call is required by the Windows Form Designer.
     End Sub
 
     Public Function GetDebugOption() As Integer
-        Return nWhichOption
+        Return Me.nWhichOption
     End Function
 
     Public Function GetFileName() As String
-        Return sFileName
+        Return Me.sFileName
     End Function
 
-    Private Sub radioLogToFile_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioLogToFile.CheckedChanged
-        edFileName.Enabled = radioLogToFile.Checked
+    Private Sub RadioLogToFile_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioLogToFile.CheckedChanged
+        Me.edFileName.Enabled = Me.radioLogToFile.Checked
     End Sub
 
     Private Sub OKbutton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OKbutton.Click
-        If radioLogToFile.Checked Then
-            sFileName = edFileName.Text
-            nWhichOption = 2
-        ElseIf radioLogConsole.Checked Then
-            nWhichOption = 3
+        If Me.radioLogToFile.Checked Then
+            Me.sFileName = Me.edFileName.Text
+            Me.nWhichOption = 2
+        ElseIf Me.radioLogConsole.Checked Then
+            Me.nWhichOption = 3
         End If
     End Sub
 
@@ -35,7 +33,7 @@ Public Class LogFileSelectionDlg
 
     End Sub
 
-    Private Sub radioLogDebugMonitor_CheckedChanged(sender As Object, e As EventArgs) Handles radioLogConsole.CheckedChanged
+    Private Sub RadioLogDebugMonitor_CheckedChanged(sender As Object, e As EventArgs) Handles radioLogConsole.CheckedChanged
 
     End Sub
 End Class
